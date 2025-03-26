@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Find Your Perfect Match - Paws from Above</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Reuse your existing styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            line-height: 1.6;
+            color: #333;
+            background-color: #e8f5e9;
+        }
+
+        .highlight {
+            color: #2196F3;
+            font-weight: bold;
+        }
+
+        .btn {
+            display: inline-block;
+            background: #2196F3;
+            color: white;
+            padding: 10px 20px;
+            margin: 10px 5px;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+
+        .btn:hover {
+            background: #0b7dda;
+        }
+
+        .btn-outline {
+            display: inline-block;
+            border: 2px solid #2196F3;
+            color: #2196F3;
+            padding: 8px 18px;
+            margin: 10px 5px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+
+        .btn-outline:hover {
+            background: #2196F3;
+            color: white;
+        }
+
+        /* Quiz Page Specific Styles */
+        .quiz-header {
+            background: url('https://images.unsplash.com/photo-1583337130417-3346a1be7dee?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') no-repeat center center/cover;
+            height: 50vh;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
+
+        .quiz-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+        }
+
+        .quiz-header-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .quiz-container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        .quiz-progress {
+            height: 10px;
+            background: #ddd;
+            border-radius: 5px;
+            margin-bottom: 30px;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: #2196F3;
+            width: 0%;
+            transition: width 0.5s;
+        }
+
+        .question-container {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+            display: none;
+        }
+
+        .question-container.active {
+            display: block;
+        }
+
+        .question-number {
+            color: #2196F3;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .options-container {
+            margin-top: 20px;
+        }
+
+        .option {
+            display: block;
+            padding: 15px;
+            margin: 10px 0;
+            background: #e8f5e9;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .option:hover {
+            background: #2196F3;
+            color: white;
+        }
+
+        .option.selected {
+            background: #2196F3;
+            color: white;
+        }
+
+        .quiz-navigation {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .result-container {
+            display: none;
+            text-align: center;
+            padding: 30px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .result-image {
+            max-width: 300px;
+            border-radius: 10px;
+            margin: 20px auto;
+            display: block;
+        }
+
+        .pet-match {
+            background: rgba(33, 150, 243, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+
+        @media (max-width: 768px) {
+            .quiz-header {
+                height: 40vh;
+            }
+            .quiz-container {
+                padding: 10px;
+            }
+            .question-container {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Quiz Header -->
+    <header class="quiz-header">
+        <div class="quiz-header-content">
+            <h1>Find Your Perfect Pet Match</h1>
+            <p>Take our 5-minute quiz to discover which animals would be the best fit for your lifestyle!</p>
+        </div>
+    </header>
+
+    <!-- Quiz Container -->
+    <div class="quiz-container">
+        <div class="quiz-progress">
+            <div class="progress-bar" id="progressBar"></div>
+        </div>
+
+        <!-- Question 1 -->
+        <div class="question-container active" id="question1">
+            <div class="question-number">Question 1 of 5</div>
+            <h2>What size pet are you looking for?</h2>
+            <div class="options-container">
+                <div class="option" data-value="small">Small (under 20 lbs/9 kg)</div>
+                <div class="option" data-value="medium">Medium (20-50 lbs/9-23 kg)</div>
+                <div class="option" data-value="large">Large (over 50 lbs/23 kg)</div>
+                <div class="option" data-value="any">Any size is fine!</div>
+            </div>
+            <div class="quiz-navigation">
+                <button class="btn-outline" disabled>Previous</button>
+                <button class="btn next-btn">Next</button>
+            </div>
+        </div>
+
+        <!-- Question 2 -->
+        <div class="question-container" id="question2">
+            <div class="question-number">Question 2 of 5</div>
+            <h2>How much time can you dedicate to your pet daily?</h2>
+            <div class="options-container">
+                <div class="option" data-value="1">Less than 1 hour</div>
+                <div class="option" data-value="2">1-2 hours</div>
+                <div class="option" data-value="3">2-4 hours</div>
+                <div class="option" data-value="4">More than 4 hours</div>
+            </div>
+            <div class="quiz-navigation">
+                <button class="btn-outline prev-btn">Previous</button>
+                <button class="btn next-btn">Next</button>
+            </div>
+        </div>
+
+        <!-- Question 3 -->
+        <div class="question-container" id="question3">
+            <div class="question-number">Question 3 of 5</div>
+            <h2>What's your living situation?</h2>
+            <div class="options-container">
+                <div class="option" data-value="apartment">Apartment/Small space</div>
+                <div class="option" data-value="house">House with yard</div>
+                <div class="option" data-value="rural">Rural/Farm area</div>
+                <div class="option" data-value="varies">It varies</div>
+            </div>
+            <div class="quiz-navigation">
+                <button class="btn-outline prev-btn">Previous</button>
+                <button class="btn next-btn">Next</button>
+            </div>
+        </div>
+
+        <!-- Question 4 -->
+        <div class="question-container" id="question4">
+            <div class="question-number">Question 4 of 5</div>
+            <h2>What energy level are you looking for?</h2>
+            <div class="options-container">
+                <div class="option" data-value="low">Low (couch potato)</div>
+                <div class="option" data-value="medium">Medium (some activity)</div>
+                <div class="option" data-value="high">High (very active)</div>
+                <div class="option" data-value="any">Any energy level</div>
+            </div>
+            <div class="quiz-navigation">
+                <button class="btn-outline prev-btn">Previous</button>
+                <button class="btn next-btn">Next</button>
+            </div>
+        </div>
+
+        <!-- Question 5 -->
+        <div class="question-container" id="question5">
+            <div class="question-number">Question 5 of 5</div>
+            <h2>What's most important to you in a pet?</h2>
+            <div class="options-container">
+                <div class="option" data-value="companionship">Companionship</div>
+                <div class="option" data-value="protection">Protection</div>
+                <div class="option" data-value="activity">Activity partner</div>
+                <div class="option" data-value="teaching">Teaching kids responsibility</div>
+            </div>
+            <div class="quiz-navigation">
+                <button class="btn-outline prev-btn">Previous</button>
+                <button class="btn" id="submit-btn">Get Results</button>
+            </div>
+        </div>
+
+        <!-- Results -->
+        <div class="result-container" id="resultContainer">
+            <h2>Your Perfect Match Is...</h2>
+            <div id="resultContent">
+                <!-- Dynamic content will be inserted here -->
+            </div>
+            <a href="adopt.html" class="btn">View Available Pets</a>
+            <a href="contact.html" class="btn-outline">Contact Us About Adoption</a>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 Paws from Above. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Quiz variables
+        const questions = document.querySelectorAll('.question-container');
+        const progressBar = document.getElementById('progressBar');
+        const resultContainer = document.getElementById('resultContainer');
+        const resultContent = document.getElementById('resultContent');
+        let currentQuestion = 0;
+        const answers = {};
+        const petMatches = {
+            "activeFamily": {
+                name: "An Active Family Dog",
+                description: "Based on your answers, you'd be perfect for a medium to large breed dog that loves activity and being part of a family. Consider breeds like Labrador Retrievers or Border Collies.",
+                image: "https://images.unsplash.com/photo-1586671267731-da2cf3ceeb80?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+            },
+            "apartmentCat": {
+                name: "A Chill Cat",
+                description: "Your lifestyle suggests you'd be a great match for an adult cat who enjoys apartment living. Consider laid-back breeds like Ragdolls or British Shorthairs.",
+                image: "https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+            },
+            "smallCompanion": {
+                name: "A Small Companion",
+                description: "You might enjoy a smaller pet like a rabbit, guinea pig, or small dog breed. These pets offer great companionship without needing as much space.",
+                image: "https://images.unsplash.com/photo-1556838803-cc94986cb631?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+            },
+            "seniorPet": {
+                name: "A Senior Pet",
+                description: "Your preferences align well with adopting an older pet who would appreciate a calm, loving home. Senior pets are often already trained and make wonderful companions.",
+                image: "https://images.unsplash.com/photo-1552053831-71594a27632d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+            }
+        };
+
+        // Initialize quiz
+        updateProgressBar();
+
+        // Option selection
+        document.querySelectorAll('.option').forEach(option => {
+            option.addEventListener('click', function() {
+                // Remove selected class from all options in this question
+                this.parentElement.querySelectorAll('.option').forEach(opt => {
+                    opt.classList.remove('selected');
+                });
+                // Add selected class to clicked option
+                this.classList.add('selected');
+            });
+        });
+
+        // Next button click
+        document.querySelectorAll('.next-btn').forEach(btn => {
+            btn.addEventListener('click', nextQuestion);
+        });
+
+        // Previous button click
+        document.querySelectorAll('.prev-btn').forEach(btn => {
+            btn.addEventListener('click', prevQuestion);
+        });
+
+        // Submit button click
+        document.getElementById('submit-btn').addEventListener('click', showResults);
+
+        function nextQuestion() {
+            // Save answer
+            const currentQuestionId = questions[currentQuestion].id;
+            const selectedOption = questions[currentQuestion].querySelector('.option.selected');
+            
+            if (!selectedOption) {
+                alert('Please select an option before continuing.');
+                return;
+            }
+            
+            answers[currentQuestionId] = selectedOption.dataset.value;
+            
+            // Move to next question
+            questions[currentQuestion].classList.remove('active');
+            currentQuestion++;
+            questions[currentQuestion].classList.add('active');
+            updateProgressBar();
+        }
+
+        function prevQuestion() {
+            // Move to previous question
+            questions[currentQuestion].classList.remove('active');
+            currentQuestion--;
+            questions[currentQuestion].classList.add('active');
+            updateProgressBar();
+        }
+
+        function updateProgressBar() {
+            const progress = ((currentQuestion) / questions.length) * 100;
+            progressBar.style.width = `${progress}%`;
+        }
+
+        function showResults() {
+            // Save last answer
+            const currentQuestionId = questions[currentQuestion].id;
+            const selectedOption = questions[currentQuestion].querySelector('.option.selected');
+            
+            if (!selectedOption) {
+                alert('Please select an option before submitting.');
+                return;
+            }
+            
+            answers[currentQuestionId] = selectedOption.dataset.value;
+            
+            // Determine result (simplified logic for demo)
+            let resultKey;
+            if (answers.question2 >= 3 && answers.question4 === "high") {
+                resultKey = "activeFamily";
+            } else if (answers.question1 === "small" && answers.question3 === "apartment") {
+                resultKey = "apartmentCat";
+            } else if (answers.question2 <= 2 && answers.question4 === "low") {
+                resultKey = "seniorPet";
+            } else {
+                resultKey = "smallCompanion";
+            }
+            
+            const result = petMatches[resultKey];
+            
+            // Display result
+            resultContent.innerHTML = `
+                <h3>${result.name}</h3>
+                <img src="${result.image}" alt="${result.name}" class="result-image">
+                <div class="pet-match">
+                    <p>${result.description}</p>
+                </div>
+                <p>We have several pets that match your profile at our shelter!</p>
+            `;
+            
+            // Hide questions and show results
+            questions[currentQuestion].classList.remove('active');
+            resultContainer.style.display = 'block';
+            progressBar.style.width = '100%';
+        }
+    </script>
+</body>
+</html>

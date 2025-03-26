@@ -1,0 +1,262 @@
+/* Global Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+}
+
+body {
+    line-height: 1.6;
+    color: #333;
+}
+
+.highlight {
+    color: #ff6b6b;
+    font-weight: bold;
+}
+
+.btn {
+    display: inline-block;
+    background: #ff6b6b;
+    color: white;
+    padding: 10px 20px;
+    margin: 10px 5px;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background 0.3s;
+}
+
+.btn:hover {
+    background: #ff5252;
+}
+
+.btn-outline {
+    display: inline-block;
+    border: 2px solid #ff6b6b;
+    color: #ff6b6b;
+    padding: 8px 18px;
+    margin: 10px 5px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: all 0.3s;
+}
+
+.btn-outline:hover {
+    background: #ff6b6b;
+    color: white;
+}
+
+/* NEW: Additional Button Styles */
+.btn-adopt {
+    background: #4CAF50; /* Green */
+}
+.btn-adopt:hover {
+    background: #45a049;
+}
+
+.btn-donate {
+    background: #2196F3; /* Blue */
+}
+.btn-donate:hover {
+    background: #0b7dda;
+}
+
+.btn-volunteer {
+    background: #ff9800; /* Orange */
+}
+.btn-volunteer:hover {
+    background: #e68a00;
+}
+
+/* Hero Section */
+.hero {
+    background: url('https://images.unsplash.com/photo-1455103493930-a116f655b6c5?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') no-repeat center center/cover;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    color: white;
+    position: relative;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+}
+
+.hero-content {
+    position: relative;
+    z-index: 1;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.hero h1 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+}
+
+.hero p {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+}
+
+.stats {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 15px;
+    border-radius: 10px;
+    margin: 20px 0;
+    display: inline-block;
+}
+
+/* Call-to-Action Section */
+.cta-section {
+    padding: 60px 20px;
+    text-align: center;
+    background: #f9f9f9;
+}
+
+.cta-section h2 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+    color: #ff6b6b;
+}
+
+.cta-section h3 {
+    font-size: 1.5rem;
+    margin: 20px 0;
+    color: #333;
+}
+
+.cta-section p {
+    font-size: 1.1rem;
+    margin-bottom: 20px;
+}
+
+.visit-us {
+    max-width: 600px;
+    margin: 40px auto;
+    padding: 20px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.visit-us i {
+    margin-right: 5px;
+    color: #ff6b6b;
+}
+
+/* NEW: Button Container */
+.action-buttons {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin: 30px 0;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 20px;
+    background: #333;
+    color: white;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .hero h1 {
+        font-size: 2rem;
+    }
+    .hero p {
+        font-size: 1rem;
+    }
+    
+    /* NEW: Stack buttons vertically on mobile */
+    .action-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+/* Navigation Options */
+.navigation-options {
+    text-align: center;
+    margin: 40px 0;
+}
+
+/* View Switcher */
+.view-switcher {
+    margin: 20px 0;
+}
+
+.view-switcher button {
+    padding: 8px 15px;
+    margin: 0 5px;
+    background: #2196F3;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.view-switcher button:disabled {
+    background: #1565C0;
+    cursor: default;
+}
+
+/* Load More Button */
+.load-more-btn {
+    padding: 12px 25px;
+    background: #2196F3;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    margin: 20px auto;
+    display: block;
+    transition: background 0.3s;
+}
+
+.load-more-btn:hover {
+    background: #0b7dda;
+}
+
+/* Pagination */
+.pagination {
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+    margin: 30px 0;
+    flex-wrap: wrap;
+}
+
+.page-btn {
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    background: white;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.page-btn.active {
+    background: #2196F3;
+    color: white;
+    border-color: #2196F3;
+}
+
+.page-btn.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
