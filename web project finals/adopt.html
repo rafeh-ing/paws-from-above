@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adopt a Pet - Paws from Above</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Reuse your existing styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            line-height: 1.6;
+            color: #333;
+            background-color: #e8f5e9;
+        }
+
+        .highlight {
+            color: #2196F3;
+            font-weight: bold;
+        }
+
+        .btn {
+            display: inline-block;
+            background: #2196F3;
+            color: white;
+            padding: 10px 20px;
+            margin: 10px 5px;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+
+        .btn:hover {
+            background: #0b7dda;
+        }
+
+        .btn-outline {
+            display: inline-block;
+            border: 2px solid #2196F3;
+            color: #2196F3;
+            padding: 8px 18px;
+            margin: 10px 5px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+
+        .btn-outline:hover {
+            background: #2196F3;
+            color: white;
+        }
+
+        /* Adopt Page Specific Styles */
+        .adopt-header {
+            background: url('https://images.unsplash.com/photo-1586671267731-da2cf3ceeb80?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') no-repeat center center/cover;
+            height: 50vh;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
+
+        .adopt-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+        }
+
+        .adopt-header-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .adopt-container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        .pet-filters {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .filter-group {
+            margin-bottom: 15px;
+        }
+
+        .filter-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        .filter-group select {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .pets-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .pet-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+
+        .pet-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .pet-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+
+        .pet-info {
+            padding: 20px;
+        }
+
+        .pet-name {
+            font-size: 1.5rem;
+            margin-bottom: 5px;
+            color: #2196F3;
+        }
+
+        .pet-meta {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            color: #666;
+        }
+
+        .adoption-process {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            margin: 40px 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .process-steps {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .process-step {
+            flex: 1;
+            min-width: 200px;
+            padding: 20px;
+            background: #e8f5e9;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .process-step i {
+            font-size: 2rem;
+            color: #2196F3;
+            margin-bottom: 15px;
+        }
+
+        .faq-section {
+            margin: 40px 0;
+        }
+
+        .faq-item {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .faq-question {
+            font-weight: bold;
+            color: #2196F3;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .faq-answer {
+            margin-top: 10px;
+            display: none;
+        }
+
+        .faq-answer.show {
+            display: block;
+        }
+
+        @media (max-width: 768px) {
+            .adopt-header {
+                height: 40vh;
+            }
+            .process-steps {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Adopt Header -->
+    <header class="adopt-header">
+        <div class="adopt-header-content">
+            <h1>Find Your Perfect Companion</h1>
+            <p>Each adoption saves two lives - the pet you adopt and the one who can now be rescued.</p>
+        </div>
+    </header>
+
+    <!-- Adopt Container -->
+    <div class="adopt-container">
+        <!-- Pet Filters -->
+        <div class="pet-filters">
+            <h2>Find Your Match</h2>
+            <div class="filter-row" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 20px;">
+                <div class="filter-group">
+                    <label for="species">Species</label>
+                    <select id="species">
+                        <option value="all">All Animals</option>
+                        <option value="dog">Dogs</option>
+                        <option value="cat">Cats</option>
+                        <option value="rabbit">Rabbits</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="age">Age</label>
+                    <select id="age">
+                        <option value="all">Any Age</option>
+                        <option value="puppy">Puppy/Kitten</option>
+                        <option value="young">Young</option>
+                        <option value="adult">Adult</option>
+                        <option value="senior">Senior</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="size">Size</label>
+                    <select id="size">
+                        <option value="all">Any Size</option>
+                        <option value="small">Small</option>
+                        <option value="medium">Medium</option>
+                        <option value="large">Large</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="gender">Gender</label>
+                    <select id="gender">
+                        <option value="all">Any Gender</option>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pets Grid -->
+        <div class="pets-grid">
+            <!-- Pet 1 -->
+            <div class="pet-card">
+                <img src="https://images.unsplash.com/photo-1586671267731-da2cf3ceeb80?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Buddy the Dog" class="pet-image">
+                <div class="pet-info">
+                    <h3 class="pet-name">Buddy</h3>
+                    <div class="pet-meta">
+                        <span>Labrador Mix</span>
+                        <span>2 years</span>
+                    </div>
+                    <p>Friendly and energetic, Buddy loves playing fetch and going for long walks.</p>
+                    <a href="#" class="btn" style="display: block; text-align: center; margin-top: 15px;">Meet Buddy</a>
+                </div>
+            </div>
+            
+            <!-- Pet 2 -->
+            <div class="pet-card">
+                <img src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Whiskers the Cat" class="pet-image">
+                <div class="pet-info">
+                    <h3 class="pet-name">Whiskers</h3>
+                    <div class="pet-meta">
+                        <span>Domestic Shorthair</span>
+                        <span>5 years</span>
+                    </div>
+                    <p>Gentle and affectionate, Whiskers enjoys sunny spots and quiet evenings.</p>
+                    <a href="#" class="btn" style="display: block; text-align: center; margin-top: 15px;">Meet Whiskers</a>
+                </div>
+            </div>
+            
+            <!-- Pet 3 -->
+            <div class="pet-card">
+                <img src="https://images.unsplash.com/photo-1556838803-cc94986cb631?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Bella the Dog" class="pet-image">
+                <div class="pet-info">
+                    <h3 class="pet-name">Bella</h3>
+                    <div class="pet-meta">
+                        <span>Beagle Mix</span>
+                        <span>3 years</span>
+                    </div>
+                    <p>Sweet and curious, Bella has a great nose and loves exploring new scents.</p>
+                    <a href="#" class="btn" style="display: block; text-align: center; margin-top: 15px;">Meet Bella</a>
+                </div>
+            </div>
+            
+            <!-- Pet 4 -->
+            <div class="pet-card">
+                <img src="https://images.unsplash.com/photo-1526336024174-e58f5cdd8e13?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Mittens the Cat" class="pet-image">
+                <div class="pet-info">
+                    <h3 class="pet-name">Mittens</h3>
+                    <div class="pet-meta">
+                        <span>Siamese Mix</span>
+                        <span>1 year</span>
+                    </div>
+                    <p>Playful and vocal, Mittens will keep you entertained with her antics.</p>
+                    <a href="#" class="btn" style="display: block; text-align: center; margin-top: 15px;">Meet Mittens</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Adoption Process -->
+        <div class="adoption-process">
+            <h2>Our Adoption Process</h2>
+            <p>We want to ensure every pet finds the perfect forever home. Here's how our adoption process works:</p>
+            
+            <div class="process-steps">
+                <div class="process-step">
+                    <i class="fas fa-search"></i>
+                    <h3>1. Find Your Pet</h3>
+                    <p>Browse our available animals online or visit our shelter.</p>
+                </div>
+                
+                <div class="process-step">
+                    <i class="fas fa-file-alt"></i>
+                    <h3>2. Submit Application</h3>
+                    <p>Complete our adoption application form.</p>
+                </div>
+                
+                <div class="process-step">
+                    <i class="fas fa-home"></i>
+                    <h3>3. Home Check</h3>
+                    <p>We'll schedule a home visit to ensure compatibility.</p>
+                </div>
+                
+                <div class="process-step">
+                    <i class="fas fa-paw"></i>
+                    <h3>4. Meet & Greet</h3>
+                    <p>Introduce all family members to your potential pet.</p>
+                </div>
+                
+                <div class="process-step">
+                    <i class="fas fa-heart"></i>
+                    <h3>5. Finalize Adoption</h3>
+                    <p>Sign paperwork and welcome your new family member!</p>
+                </div>
+            </div>
+            
+            <div style="text-align: center;">
+                <a href="#" class="btn">Download Adoption Application</a>
+                <a href="#" class="btn-outline">Adoption FAQs</a>
+            </div>
+        </div>
+
+        <!-- FAQ Section -->
+        <div class="faq-section">
+            <h2>Adoption FAQs</h2>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>What are your adoption fees?</span>
+                    <i class="fas fa-plus"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>Our adoption fees vary by animal and typically range from $50-$200. This includes spay/neuter, vaccinations, microchipping, and a health check.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>What requirements do you have for adopters?</span>
+                    <i class="fas fa-plus"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>Adopters must be at least 21 years old, provide proof of address, and demonstrate the ability to care for the animal. We also verify that all pets in the home are spayed/neutered and up-to-date on vaccinations.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>Can I return a pet if it doesn't work out?</span>
+                    <i class="fas fa-plus"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>Yes, we have a lifetime return policy. If for any reason you can no longer care for your adopted pet, we require that you return them to us rather than rehoming them yourself.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer (reuse from main page) -->
+    <footer>
+        <p>&copy; 2025 Paws from Above. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // FAQ toggle functionality
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', () => {
+                const answer = question.nextElementSibling;
+                const icon = question.querySelector('i');
+                
+                answer.classList.toggle('show');
+                
+                if (answer.classList.contains('show')) {
+                    icon.classList.remove('fa-plus');
+                    icon.classList.add('fa-minus');
+                } else {
+                    icon.classList.remove('fa-minus');
+                    icon.classList.add('fa-plus');
+                }
+            });
+        });
+
+        // Simple filter functionality
+        document.querySelectorAll('.filter-group select').forEach(select => {
+            select.addEventListener('change', () => {
+                // In a real implementation, this would filter the pet cards
+                console.log('Filtering by:', select.id, select.value);
+            });
+        });
+    </script>
+</body>
+</html>

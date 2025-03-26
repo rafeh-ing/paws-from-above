@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paws from Above - Animal Rescue</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            line-height: 1.6;
+            color: #333;
+            background-color: #e8f5e9;
+        }
+
+        .highlight {
+            color: #2196F3;
+            font-weight: bold;
+        }
+
+        .btn {
+            display: inline-block;
+            background: #2196F3;
+            color: white;
+            padding: 10px 20px;
+            margin: 10px 5px;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+
+        .btn:hover {
+            background: #0b7dda;
+        }
+
+        .btn-outline {
+            display: inline-block;
+            border: 2px solid #2196F3;
+            color: #2196F3;
+            padding: 8px 18px;
+            margin: 10px 5px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+
+        .btn-outline:hover {
+            background: #2196F3;
+            color: white;
+        }
+
+        /* Action Buttons */
+        .action-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 25px 0;
+        }
+
+        .btn-adopt, .btn-donate, .btn-volunteer {
+            background: #2196F3;
+        }
+        .btn-adopt:hover, .btn-donate:hover, .btn-volunteer:hover {
+            background: #0b7dda;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: url('https://images.unsplash.com/photo-1455103493930-a116f655b6c5?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') no-repeat center center/cover;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            transform: translateY(40px);
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+        }
+
+        .stats {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px 0;
+            display: inline-block;
+        }
+
+        /* Corrected Image containers - No more cut-off images */
+        .stats-image-container, 
+        .adopt-image-container,
+        .location-image-container {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0;
+        }
+        
+        .stats-image, 
+        .adopt-image,
+        .location-image {
+            max-width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            height: auto; /* Maintains natural proportions */
+        }
+        
+        .stats-image {
+            max-width: 300px;
+        }
+        
+        .adopt-image {
+            max-width: 250px;
+        }
+        
+        .location-image {
+            max-width: 350px;
+        }
+
+        /* Call-to-Action Section */
+        .cta-section {
+            padding: 60px 20px;
+            text-align: center;
+            background: #e8f5e9;
+        }
+
+        .cta-section h2 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            color: #2196F3;
+        }
+
+        .cta-section h3 {
+            font-size: 1.5rem;
+            margin: 20px 0;
+            color: #333;
+        }
+
+        .cta-section p {
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+        }
+        
+
+        .visit-us {
+            max-width: 600px;
+            margin: 40px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .visit-us i {
+            margin-right: 5px;
+            color: #2196F3;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 20px;
+            background: #333;
+            color: white;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            .hero p {
+                font-size: 1rem;
+            }
+            .action-buttons {
+                flex-direction: column;
+                align-items: center;
+                gap: 10px;
+            }
+            .stats-image {
+                max-width: 250px;
+            }
+            .adopt-image {
+                max-width: 200px;
+            }
+            .location-image {
+                max-width: 300px;
+            }
+            .hero-content {
+                transform: translateY(20px);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <header class="hero">
+        <div class="hero-content">
+            <h1>Giving Every Animal a Second Chance at Life.</h1>
+            <p>Paws from Above is dedicated to providing a safe haven for abandoned and neglected animals, ensuring they find loving forever homes.</p>
+            <div class="stats">
+                <p>Thanks to Paws from Above, <span class="highlight">100+</span> animals find their forever home daily.</p>
+            </div>
+            
+            <div class="stats-image-container">
+                <img src="1.jpg" alt="Happy adopted animals" class="stats-image">
+            </div>
+            
+            <a href="adoptable-pets.html" class="btn">Meet Our Pets</a>
+        </div>
+    </header>
+
+    <!-- Call-to-Action Section -->
+    <section id="action" class="cta-section">
+        <div class="cta-content">
+            <h2>Take Action</h2>
+            <h3>ADOPT, DON'T SHOP!</h3>
+            
+            <div class="adopt-image-container">
+                <img src="2.webp" alt="Adoption promotion" class="adopt-image">
+            </div>
+            
+            <p>"Give the gift of hope to animals in need."</p>
+            
+            <div class="action-buttons">
+                <a href="adopt.html" class="btn btn-adopt">Adopt Now</a>
+                <a href="donate.html" class="btn btn-donate">Donate</a>
+                <a href="volunteer.html" class="btn btn-volunteer">Volunteer</a>
+            </div>
+            
+            <div class="visit-us">
+                <h3>VISIT US Today!</h3>
+                <p><i class="fas fa-map-marker-alt"></i> Sidi Thabet</p>
+                
+                <div class="location-image-container">
+                    <img src="3.png" alt="Sidi Thabet location photo" class="location-image">
+                </div>
+                
+                <p>We're located in the heart of Sidi Thabet, Tunisia. Come see our facility, meet our animals, and learn how you can help!</p>
+                <a href="journey.html" class="btn">Start Your Journey</a>
+                <a href="directions.html" class="btn-outline">GET DIRECTIONS</a>
+                <a href="contact.html" class="btn-outline">CONTACT US</a>
+                <a href="success-stories.html" class="btn">Success Stories</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 Paws from Above. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>

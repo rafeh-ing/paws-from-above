@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donate to Paws from Above</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Reuse your existing styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            line-height: 1.6;
+            color: #333;
+            background-color: #e8f5e9;
+        }
+
+        .highlight {
+            color: #2196F3;
+            font-weight: bold;
+        }
+
+        .btn {
+            display: inline-block;
+            background: #2196F3;
+            color: white;
+            padding: 10px 20px;
+            margin: 10px 5px;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+
+        .btn:hover {
+            background: #0b7dda;
+        }
+
+        /* Donation Page Specific Styles */
+        .donation-header {
+            background: url('https://images.unsplash.com/photo-1455103493930-a116f655b6c5?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') no-repeat center center/cover;
+            height: 50vh;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
+
+        .donation-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+        }
+
+        .donation-header-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .donation-container {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        .donation-options {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .donation-card {
+            background: white;
+            border-radius: 10px;
+            padding: 25px;
+            width: 300px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .donation-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .donation-card i {
+            font-size: 2.5rem;
+            color: #2196F3;
+            margin-bottom: 15px;
+        }
+
+        .donation-amounts {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            margin: 20px 0;
+        }
+
+        .amount-btn {
+            padding: 10px 15px;
+            background: #e8f5e9;
+            border: 2px solid #2196F3;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .amount-btn:hover {
+            background: #2196F3;
+            color: white;
+        }
+
+        .amount-btn.selected {
+            background: #2196F3;
+            color: white;
+        }
+
+        .custom-amount {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #2196F3;
+            border-radius: 5px;
+            margin: 10px 0;
+        }
+
+        .payment-methods {
+            margin: 30px 0;
+        }
+
+        .method-option {
+            display: flex;
+            align-items: center;
+            margin: 15px 0;
+        }
+
+        .method-option input {
+            margin-right: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .donation-header {
+                height: 40vh;
+            }
+            .donation-card {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Donation Header -->
+    <header class="donation-header">
+        <div class="donation-header-content">
+            <h1>Support Our Mission</h1>
+            <p>Your donation helps us provide food, shelter, and medical care to animals in need.</p>
+        </div>
+    </header>
+
+    <!-- Donation Options -->
+    <div class="donation-container">
+        <h2>Choose Your Donation Method</h2>
+        <p>Every contribution makes a difference in an animal's life.</p>
+        
+        <div class="donation-options">
+            <!-- One-Time Donation -->
+            <div class="donation-card">
+                <i class="fas fa-hand-holding-heart"></i>
+                <h3>One-Time Gift</h3>
+                <p>Make a single donation to support our immediate needs.</p>
+                
+                <div class="donation-amounts">
+                    <div class="amount-btn">$25</div>
+                    <div class="amount-btn">$50</div>
+                    <div class="amount-btn">$100</div>
+                    <div class="amount-btn">$250</div>
+                </div>
+                
+                <input type="number" class="custom-amount" placeholder="Or enter custom amount">
+                <a href="#" class="btn">Donate Now</a>
+            </div>
+            
+            <!-- Monthly Donation -->
+            <div class="donation-card">
+                <i class="fas fa-calendar-alt"></i>
+                <h3>Monthly Support</h3>
+                <p>Become a sustaining donor with automatic monthly gifts.</p>
+                
+                <div class="donation-amounts">
+                    <div class="amount-btn">$10</div>
+                    <div class="amount-btn">$25</div>
+                    <div class="amount-btn">$50</div>
+                    <div class="amount-btn">$100</div>
+                </div>
+                
+                <input type="number" class="custom-amount" placeholder="Or enter custom amount">
+                <a href="#" class="btn">Start Monthly Giving</a>
+            </div>
+            
+            <!-- Sponsor an Animal -->
+            <div class="donation-card">
+                <i class="fas fa-paw"></i>
+                <h3>Sponsor an Animal</h3>
+                <p>Provide ongoing care for a specific animal in our shelter.</p>
+                <a href="#" class="btn">Meet Animals Needing Sponsors</a>
+            </div>
+        </div>
+        
+        <!-- Payment Methods -->
+        <div class="payment-methods">
+            <h3>Payment Method</h3>
+            <div class="method-option">
+                <input type="radio" id="credit-card" name="payment" checked>
+                <label for="credit-card">Credit/Debit Card</label>
+            </div>
+            <div class="method-option">
+                <input type="radio" id="paypal" name="payment">
+                <label for="paypal">PayPal</label>
+            </div>
+            <div class="method-option">
+                <input type="radio" id="bank-transfer" name="payment">
+                <label for="bank-transfer">Bank Transfer</label>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer (reuse from main page) -->
+    <footer>
+        <p>&copy; 2025 Paws from Above. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Amount selection functionality
+        document.querySelectorAll('.amount-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                // Remove selected class from all buttons in this card
+                this.parentElement.querySelectorAll('.amount-btn').forEach(b => {
+                    b.classList.remove('selected');
+                });
+                // Add selected class to clicked button
+                this.classList.add('selected');
+            });
+        });
+
+        // Link back to your main page
+        document.querySelector('.btn').addEventListener('click', function(e) {
+            e.preventDefault();
+            alert('Thank you for your donation! This would connect to a payment processor in a real implementation.');
+        });
+    </script>
+</body>
+</html>

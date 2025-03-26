@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Start Your Journey - Paws from Above</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Reuse your existing styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            line-height: 1.6;
+            color: #333;
+            background-color: #e8f5e9;
+        }
+
+        .highlight {
+            color: #2196F3;
+            font-weight: bold;
+        }
+
+        .btn {
+            display: inline-block;
+            background: #2196F3;
+            color: white;
+            padding: 10px 20px;
+            margin: 10px 5px;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+
+        .btn:hover {
+            background: #0b7dda;
+        }
+
+        /* Journey Page Specific Styles */
+        .journey-header {
+            background: url('https://images.unsplash.com/photo-1544568100-847a948585b9?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') no-repeat center center/cover;
+            height: 50vh;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
+
+        .journey-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+        }
+
+        .journey-header-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .journey-container {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        .journey-steps {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .journey-card {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            width: 300px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .journey-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .journey-card i {
+            font-size: 3rem;
+            color: #2196F3;
+            margin-bottom: 20px;
+        }
+
+        .journey-card h3 {
+            margin-bottom: 15px;
+            color: #2196F3;
+        }
+
+        .testimonial-section {
+            background: rgba(33, 150, 243, 0.1);
+            padding: 40px;
+            border-radius: 10px;
+            margin: 40px 0;
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            .journey-header {
+                height: 40vh;
+            }
+            .journey-card {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Journey Header -->
+    <header class="journey-header">
+        <div class="journey-header-content">
+            <h1>Begin Your Animal Rescue Journey</h1>
+            <p>Whether you want to adopt, volunteer, or support our mission, we'll guide you every step of the way.</p>
+        </div>
+    </header>
+
+    <!-- Journey Container -->
+    <div class="journey-container">
+        <h2>How to Get Involved</h2>
+        <p>Choose the path that's right for you and make a difference in an animal's life today.</p>
+        
+        <div class="journey-steps">
+            <!-- Adoption Path -->
+            <div class="journey-card">
+                <i class="fas fa-paw"></i>
+                <h3>Adoption Journey</h3>
+                <p>Find your perfect companion and give them a loving forever home.</p>
+                <a href="adopt.html" class="btn">Start Adoption Process</a>
+            </div>
+            
+            <!-- Volunteer Path -->
+            <div class="journey-card">
+                <i class="fas fa-hands-helping"></i>
+                <h3>Volunteer Journey</h3>
+                <p>Donate your time and skills to help animals in need.</p>
+                <a href="volunteer.html" class="btn">Become a Volunteer</a>
+            </div>
+            
+            <!-- Donation Path -->
+            <div class="journey-card">
+                <i class="fas fa-donate"></i>
+                <h3>Support Journey</h3>
+                <p>Help fund our mission through donations or sponsorships.</p>
+                <a href="donate.html" class="btn">Make a Donation</a>
+            </div>
+        </div>
+
+        <!-- Testimonial Section -->
+        <div class="testimonial-section">
+            <h2>Success Stories</h2>
+            <p>"After following the adoption journey with Paws from Above, we found the perfect addition to our family. The guidance and support made the process so smooth!"</p>
+            <p><strong>- The Johnson Family, Adopters since 2023</strong></p>
+        </div>
+
+        <div style="text-align: center; margin-top: 40px;">
+            <h3>Not Sure Where to Begin?</h3>
+            <p>Take our quick quiz to find the best way for you to get involved.</p>
+            <a href="quiz.html" class="btn">Take the Quiz</a>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 Paws from Above. All rights reserved.</p>
+    </footer>
+</body>
+</html>

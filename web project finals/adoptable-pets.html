@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adoptable Pets - Paws from Above</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            line-height: 1.6;
+            color: #333;
+            background-color: #e8f5e9;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Header Styles */
+        .gallery-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .gallery-header h1 {
+            font-size: 2.5rem;
+            color: #2196F3;
+            margin-bottom: 10px;
+        }
+
+        .gallery-header p {
+            font-size: 1.2rem;
+            color: #555;
+        }
+
+        /* Search Bar */
+        .search-container {
+            display: flex;
+            justify-content: center;
+            margin: 30px 0;
+        }
+
+        .search-box {
+            width: 60%;
+            padding: 12px 20px;
+            border: 2px solid #2196F3;
+            border-radius: 30px;
+            font-size: 1rem;
+            outline: none;
+        }
+
+        /* Pets Gallery */
+        .pets-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        <!-- Add this AFTER your pets gallery div -->
+<div class="navigation-options">
+    <!-- Option 1: Pagination (shown by default) -->
+    <div class="pagination" id="pagination"></div>
+    
+    <!-- Option 2: Load More Button (hidden by default) -->
+    <button id="loadMoreBtn" class="load-more-btn" style="display:none;">
+        Load More Pets <i class="fas fa-paw"></i>
+    </button>
+    
+    <!-- Switch between views -->
+    <div class="view-switcher">
+        <button id="showPagination">Show Page Numbers</button>
+        <button id="showLoadMore">Show Load More</button>
+    </div>
+</div>
+        .pet-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+
+        .pet-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .pet-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+
+        .pet-info {
+            padding: 20px;
+        }
+
+        .pet-info h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: #2196F3;
+        }
+
+        .pet-info p {
+            margin: 8px 0;
+            color: #555;
+        }
+
+        .status {
+            display: inline-block;
+            padding: 5px 10px;
+            background: #FFC107;
+            color: #333;
+            border-radius: 5px;
+            font-size: 0.9rem;
+            margin-top: 10px;
+        }
+
+        .adopt-btn {
+            display: inline-block;
+            background: #2196F3;
+            color: white;
+            padding: 10px 20px;
+            margin-top: 15px;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background 0.3s;
+            cursor: pointer;
+            width: 100%;
+            text-align: center;
+        }
+
+        .adopt-btn:hover {
+            background: #0b7dda;
+        }
+
+        /* Pagination */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            margin: 40px 0;
+            gap: 10px;
+        }
+
+        .page-btn {
+            padding: 10px 15px;
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .page-btn:hover {
+            background: #2196F3;
+            color: white;
+            border-color: #2196F3;
+        }
+
+        .page-btn.active {
+            background: #2196F3;
+            color: white;
+            border-color: #2196F3;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .search-box {
+                width: 80%;
+            }
+            
+            .pets-gallery {
+                grid-template-columns: 1fr;
+            }
+            
+            .gallery-header h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="gallery-header">
+            <h1>ADOPTABLE PETS GALLERY</h1>
+            <p>Find your new best friend and give them a loving home</p>
+        </header>
+
+        <div class="search-container">
+            <input type="text" class="search-box" placeholder="SEARCH FOR A SPECIFIC BREED...">
+        </div>
+
+        <div class="pets-gallery" id="petsGallery">
+            <!-- Pets will be loaded here by JavaScript -->
+        </div>
+
+        <div class="pagination" id="pagination">
+            <!-- Pagination will be loaded here by JavaScript -->
+        </div>
+    </div>
+
+    <script>
+        // Pet data
+        const allPets = [
+            { 
+                id: 1, 
+                name: "REX", 
+                age: "3 years", 
+                breed: "Tabby Cat", 
+                gender: "Male", 
+                status: "Pending Adoption", 
+                image: "rex.jpg" 
+            },
+            { 
+                id: 2, 
+                name: "DAMI", 
+                age: "3 years", 
+                breed: "Tabby Cat", 
+                gender: "Male", 
+                status: "Pending Adoption", 
+                image: "dami.jpg" 
+            },
+            { 
+                id: 3, 
+                name: "SIMBA", 
+                age: "3 years", 
+                breed: "Tabby Cat", 
+                gender: "Male", 
+                status: "Pending Adoption", 
+                image: "simba.jpg" 
+            },
+            { 
+                id: 4, 
+                name: "TOM", 
+                age: "3 years", 
+                breed: "Tabby Cat", 
+                gender: "Male", 
+                status: "Pending Adoption", 
+                image: "tom.jpg" 
+            },
+            { 
+                id: 5, 
+                name: "PIERRO", 
+                age: "3 years", 
+                breed: "Tabby Cat", 
+                gender: "Male", 
+                status: "Pending Adoption", 
+                image: "pierro.jpg" 
+            },
+            { 
+                id: 6, 
+                name: "MECHMECH", 
+                age: "3 years", 
+                breed: "Tabby Cat", 
+                gender: "Male", 
+                status: "Pending Adoption", 
+                image: "mechmech.jpg" 
+            }
+        ];
+
+        // DOM elements
+        const petsGallery = document.getElementById('petsGallery');
+        const pagination = document.getElementById('pagination');
+        const searchBox = document.querySelector('.search-box');
+
+        // Pagination variables
+        const petsPerPage = 6;
+        let currentPage = 1;
+        let filteredPets = [...allPets];
+
+        // Initialize the page
+        function init() {
+            renderPets();
+            renderPagination();
+            setupEventListeners();
+        }
+
+        // Render pets for current page
+        function renderPets() {
+            petsGallery.innerHTML = '';
+            const startIndex = (currentPage - 1) * petsPerPage;
+            const petsToShow = filteredPets.slice(startIndex, startIndex + petsPerPage);
+            
+            if (petsToShow.length === 0) {
+                petsGallery.innerHTML = '<p style="grid-column: 1/-1; text-align: center;">No pets found matching your search.</p>';
+                return;
+            }
+            
+            petsToShow.forEach(pet => {
+                const petCard = document.createElement('div');
+                petCard.className = 'pet-card';
+                petCard.innerHTML = `
+                    <img src="${pet.image}" alt="${pet.name}" class="pet-image">
+                    <div class="pet-info">
+                        <h3>${pet.name}</h3>
+                        <p><strong>Age:</strong> ${pet.age}</p>
+                        <p><strong>Breed:</strong> ${pet.breed}</p>
+                        <p><strong>Gender:</strong> ${pet.gender}</p>
+                        <span class="status">${pet.status}</span>
+                        <button class="adopt-btn" 
+                                onclick="location.href='adoption-confirmation.html?name=${encodeURIComponent(pet.name)}&image=${encodeURIComponent(pet.image)}&status=${encodeURIComponent(pet.status)}'">
+                            ADOPT
+                        </button>
+                    </div>
+                `;
+                petsGallery.appendChild(petCard);
+            });
+        }
+
+        // Render pagination buttons
+        function renderPagination() {
+            pagination.innerHTML = '';
+            const totalPages = Math.ceil(filteredPets.length / petsPerPage);
+            
+            if (totalPages <= 1) return;
+            
+            // Previous button
+            const prevBtn = document.createElement('button');
+            prevBtn.innerHTML = '&laquo; Previous';
+            prevBtn.className = 'page-btn';
+            prevBtn.disabled = currentPage === 1;
+            if (currentPage === 1) prevBtn.classList.add('disabled');
+            prevBtn.addEventListener('click', () => {
+                if (currentPage > 1) {
+                    currentPage--;
+                    renderPets();
+                    renderPagination();
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                }
+            });
+            pagination.appendChild(prevBtn);
+            
+            // Page numbers
+            for (let i = 1; i <= totalPages; i++) {
+                const pageBtn = document.createElement('button');
+                pageBtn.textContent = i;
+                pageBtn.className = 'page-btn';
+                if (i === currentPage) pageBtn.classList.add('active');
+                pageBtn.addEventListener('click', () => {
+                    currentPage = i;
+                    renderPets();
+                    renderPagination();
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                });
+                pagination.appendChild(pageBtn);
+            }
+            
+            // Next button
+            const nextBtn = document.createElement('button');
+            nextBtn.innerHTML = 'Next &raquo;';
+            nextBtn.className = 'page-btn';
+            nextBtn.disabled = currentPage === totalPages;
+            if (currentPage === totalPages) nextBtn.classList.add('disabled');
+            nextBtn.addEventListener('click', () => {
+                if (currentPage < totalPages) {
+                    currentPage++;
+                    renderPets();
+                    renderPagination();
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                }
+            });
+            pagination.appendChild(nextBtn);
+        }
+
+        // Filter pets based on search
+        function filterPets() {
+            const searchTerm = searchBox.value.toLowerCase();
+            filteredPets = allPets.filter(pet => 
+                pet.name.toLowerCase().includes(searchTerm) || 
+                pet.breed.toLowerCase().includes(searchTerm)
+            );
+            currentPage = 1; // Reset to first page
+            renderPets();
+            renderPagination();
+        }
+
+        // Setup event listeners
+        function setupEventListeners() {
+            searchBox.addEventListener('input', filterPets);
+        }
+
+        // Initialize the page
+        init();
+    </script>
+</body>
+</html>

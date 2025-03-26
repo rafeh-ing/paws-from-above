@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Tails - Paws from Above</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Reuse your existing styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            line-height: 1.6;
+            color: #333;
+            background-color: #e8f5e9;
+        }
+
+        .highlight {
+            color: #2196F3;
+            font-weight: bold;
+        }
+
+        .btn {
+            display: inline-block;
+            background: #2196F3;
+            color: white;
+            padding: 10px 20px;
+            margin: 10px 5px;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+
+        .btn:hover {
+            background: #0b7dda;
+        }
+
+        /* Success Stories Specific Styles */
+        .stories-header {
+            background: url('https://images.unsplash.com/photo-1544568100-847a948585b9?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') no-repeat center center/cover;
+            height: 50vh;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
+
+        .stories-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+        }
+
+        .stories-header-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .stories-container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        .story-card {
+            display: flex;
+            flex-wrap: wrap;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            margin-bottom: 40px;
+            transition: transform 0.3s;
+        }
+
+        .story-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .story-image {
+            flex: 1;
+            min-width: 300px;
+            height: 350px;
+            object-fit: cover;
+        }
+
+        .story-content {
+            flex: 1;
+            min-width: 300px;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .story-pet-name {
+            color: #2196F3;
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+
+        .story-meta {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 15px;
+            color: #666;
+        }
+
+        .story-quote {
+            font-style: italic;
+            font-size: 1.1rem;
+            margin: 20px 0;
+            position: relative;
+            padding-left: 20px;
+            border-left: 3px solid #2196F3;
+        }
+
+        .share-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .share-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            color: white;
+            transition: transform 0.3s;
+        }
+
+        .share-btn:hover {
+            transform: scale(1.1);
+        }
+
+        .facebook { background: #3b5998; }
+        .twitter { background: #1da1f2; }
+        .instagram { background: #e1306c; }
+
+        .cta-section {
+            text-align: center;
+            margin: 50px 0;
+        }
+
+        .before-after {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .before-after-image {
+            flex: 1;
+            min-width: 250px;
+            text-align: center;
+        }
+
+        .before-after-image img {
+            width: 100%;
+            max-height: 300px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        .before-after-image p {
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .stories-header {
+                height: 40vh;
+            }
+            .story-image {
+                height: 250px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Success Stories Header -->
+    <header class="stories-header">
+        <div class="stories-header-content">
+            <h1>Happy Tails</h1>
+            <p>Every adoption creates a new success story. Read how our rescues have transformed lives.</p>
+        </div>
+    </header>
+
+    <!-- Success Stories Container -->
+    <div class="stories-container">
+        <!-- Story 1 -->
+        <div class="story-card">
+            <img src="https://images.unsplash.com/photo-1586671267731-da2cf3ceeb80?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Buddy the Dog" class="story-image">
+            <div class="story-content">
+                <h2 class="story-pet-name">Buddy</h2>
+                <div class="story-meta">
+                    <span><i class="fas fa-paw"></i> Labrador Mix</span>
+                    <span><i class="fas fa-home"></i> Adopted February 2023</span>
+                </div>
+                
+                <div class="before-after">
+                    <div class="before-after-image">
+                        <img src="https://images.unsplash.com/photo-1601758003122-53c40e686a19?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Buddy before">
+                        <p>Before Rescue</p>
+                    </div>
+                    <div class="before-after-image">
+                        <img src="https://images.unsplash.com/photo-1586671267731-da2cf3ceeb80?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Buddy after">
+                        <p>After Adoption</p>
+                    </div>
+                </div>
+                
+                <blockquote class="story-quote">
+                    "When we first met Buddy at the shelter, he was scared and underweight. Today, he's the happiest dog who loves hiking and cuddles in equal measure!"
+                </blockquote>
+                <p>- The Johnson Family</p>
+                
+                <div class="share-buttons">
+                    <a href="#" class="share-btn facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="share-btn twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="share-btn instagram"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Story 2 -->
+        <div class="story-card">
+            <img src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Whiskers the Cat" class="story-image">
+            <div class="story-content">
+                <h2 class="story-pet-name">Whiskers</h2>
+                <div class="story-meta">
+                    <span><i class="fas fa-paw"></i> Domestic Shorthair</span>
+                    <span><i class="fas fa-home"></i> Adopted November 2022</span>
+                </div>
+                
+                <div class="before-after">
+                    <div class="before-after-image">
+                        <img src="https://images.unsplash.com/photo-1574235664854-92e1da7d229a?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Whiskers before">
+                        <p>Before Rescue</p>
+                    </div>
+                    <div class="before-after-image">
+                        <img src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Whiskers after">
+                        <p>After Adoption</p>
+                    </div>
+                </div>
+                
+                <blockquote class="story-quote">
+                    "Whiskers was found abandoned in a box. Now she rules our apartment with gentle paws and endless purrs. She's helped my anxiety more than any medication ever could."
+                </blockquote>
+                <p>- Sarah, single adopter</p>
+                
+                <div class="share-buttons">
+                    <a href="#" class="share-btn facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="share-btn twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="share-btn instagram"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Story 3 -->
+        <div class="story-card">
+            <img src="https://images.unsplash.com/photo-1552053831-71594a27632d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Molly the Senior Dog" class="story-image">
+            <div class="story-content">
+                <h2 class="story-pet-name">Molly</h2>
+                <div class="story-meta">
+                    <span><i class="fas fa-paw"></i> Golden Retriever</span>
+                    <span><i class="fas fa-home"></i> Adopted June 2023</span>
+                </div>
+                
+                <div class="before-after">
+                    <div class="before-after-image">
+                        <img src="https://images.unsplash.com/photo-1556838803-cc94986cb631?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Molly before">
+                        <p>Before Rescue</p>
+                    </div>
+                    <div class="before-after-image">
+                        <img src="https://images.unsplash.com/photo-1552053831-71594a27632d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Molly after">
+                        <p>After Adoption</p>
+                    </div>
+                </div>
+                
+                <blockquote class="story-quote">
+                    "People said adopting a senior dog would be heartbreaking, but Molly has brought nothing but joy. She's proof that older dogs have so much love to give!"
+                </blockquote>
+                <p>- The Thompson Family</p>
+                
+                <div class="share-buttons">
+                    <a href="#" class="share-btn facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="share-btn twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="share-btn instagram"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <!-- CTA Section -->
+        <div class="cta-section">
+            <h2>Ready to Create Your Own Success Story?</h2>
+            <p>Every adoption creates space for us to rescue another animal in need.</p>
+            <a href="adopt.html" class="btn">View Animals Available for Adoption</a>
+            <a href="donate.html" class="btn-outline">Support Our Rescue Efforts</a>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 Paws from Above. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Simple animation for story cards when they come into view
+        const storyCards = document.querySelectorAll('.story-card');
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = 1;
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, { threshold: 0.1 });
+        
+        storyCards.forEach(card => {
+            card.style.opacity = 0;
+            card.style.transform = 'translateY(20px)';
+            card.style.transition = 'all 0.6s ease-out';
+            observer.observe(card);
+        });
+    </script>
+</body>
+</html>
